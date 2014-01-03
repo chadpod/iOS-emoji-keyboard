@@ -17,7 +17,9 @@
 #define PAGE_CONTROL_INDICATOR_DIAMETER 6.0
 #define RECENT_EMOJIS_MAINTAINED_COUNT 50
 
-#define BACKGROUND_COLOR 0xECECEC
+#define BACKGROUND_COLOR 0xFAF7F7
+
+static CGFloat const kScrollViewTopMargin = 8.0;
 
 static NSString *const segmentRecentName = @"Recent";
 NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
@@ -45,6 +47,9 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
 @property (nonatomic, retain) NSDictionary *emojis;
 @property (nonatomic, retain) NSMutableArray *pageViews;
 @property (nonatomic, retain) NSString *category;
+@property (nonatomic, assign) NSUInteger selectedIndex;
+@property (nonatomic, retain) UIView* barDivider;
+@property (nonatomic, retain) UIImageView* infoImageView;
 
 @end
 
@@ -62,7 +67,6 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"EmojisList"
                                                           ofType:@"plist"];
     emojis_ = [[NSDictionary dictionaryWithContentsOfFile:plistPath] copy];
-    NSLog(@"File read");
   }
   return emojis_;
 }
@@ -86,6 +90,11 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
   [[NSUserDefaults standardUserDefaults] setObject:recentEmojis forKey:RecentUsedEmojiCharactersKey];
 }
 
++ (void)clearRecentEmojis {
+  [[NSUserDefaults standardUserDefaults] setObject:[NSMutableArray array] forKey:RecentUsedEmojiCharactersKey];
+  [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
   self = [super initWithFrame:frame];
@@ -96,26 +105,44 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
     self.backgroundColor = [UIColor colorWithIntegerValue:BACKGROUND_COLOR alpha:1.0];
 
     self.segmentsBar = [[[UISegmentedControl alloc] initWithItems:@[
-                         [UIImage imageNamed:@"recent_n.png"],
-                         [UIImage imageNamed:@"face_n.png"],
-                         [UIImage imageNamed:@"bell_n.png"],
-                         [UIImage imageNamed:@"flower_n.png"],
-                         [UIImage imageNamed:@"car_n.png"],
-                         [UIImage imageNamed:@"characters_n.png"]
+                         [[UIImage imageNamed:@"emoji_tab_recent_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal],
+                         [[UIImage imageNamed:@"emoji_tab_face_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal],
+                         [[UIImage imageNamed:@"emoji_tab_bell_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal],
+                         [[UIImage imageNamed:@"emoji_tab_flower_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal],
+                         [[UIImage imageNamed:@"emoji_tab_car_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal],
+                         [[UIImage imageNamed:@"emoji_tab_symbols_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal],
+                         [[UIImage imageNamed:@"emoji_delete_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                          ]] autorelease];
-    self.segmentsBar.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.segmentsBar.bounds));
-    self.segmentsBar.segmentedControlStyle = UISegmentedControlStyleBar;
+    CGFloat segmentBarHeight = 48.0;
+    self.segmentsBar.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - segmentBarHeight, CGRectGetWidth(self.bounds), segmentBarHeight);
     self.segmentsBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    self.segmentsBar.contentMode = UIViewContentModeScaleAspectFill;
 
-    [self.segmentsBar setDividerImage:[UIImage imageNamed:@"icons_bg_separator.png"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [self.segmentsBar setDividerImage:[UIImage imageNamed:@"corner_left.png"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
-    [self.segmentsBar setDividerImage:[UIImage imageNamed:@"corner_right.png"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [self.segmentsBar setBackgroundImage:[UIImage imageNamed:@"unselected_center_bg.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [self.segmentsBar setBackgroundImage:[UIImage imageNamed:@"tab_bg.png"] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
-
-    [self.segmentsBar addTarget:self action:@selector(categoryChangedViaSegmentsBar:) forControlEvents:UIControlEventValueChanged];
+    // set custom background image
+    [self.segmentsBar setBackgroundImage:[UIImage imageNamed:@"emoji_tab_bg.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.segmentsBar setBackgroundImage:[UIImage imageNamed:@"emoji_tab_bg.png"] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    [self.segmentsBar setBackgroundImage:[UIImage imageNamed:@"emoji_tab_bg.png"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+    
+    // set custom divider
+    UIImage* dividerImage = [UIImage imageNamed:@"emoji_divider.png"];
+    [self.segmentsBar setDividerImage:dividerImage forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    // manually set the width for each tab so the tabs utilize the entire width of the segment control,
+    // since iOS is too stupid to figure this out on its own.
+    CGFloat dividerWidth = dividerImage.size.width;
+    CGFloat remainingWidth = CGRectGetWidth(self.segmentsBar.frame);
+    remainingWidth -= ((self.segmentsBar.numberOfSegments - 1) * dividerWidth);
+    for (int i=0; i < self.segmentsBar.numberOfSegments; ++i) {
+      CGFloat remainingTabs = self.segmentsBar.numberOfSegments - i;
+      CGFloat tabWidth = floorf(remainingWidth / remainingTabs);
+      [self.segmentsBar setWidth:tabWidth forSegmentAtIndex:i];
+      remainingWidth -= tabWidth;
+    }
+    
+    [self.segmentsBar addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     [self setSelectedCategoryImageInSegmentControl:self.segmentsBar AtIndex:DEFAULT_SELECTED_SEGMENT];
     self.segmentsBar.selectedSegmentIndex = DEFAULT_SELECTED_SEGMENT;
+    self.selectedIndex = self.segmentsBar.selectedSegmentIndex; // initialize property
     [self addSubview:self.segmentsBar];
 
     self.pageControl = [[DDPageControl alloc] initWithType:DDPageControlTypeOnFullOffFull];
@@ -131,14 +158,14 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
     self.pageControl.numberOfPages = numberOfPages;
     pageControlSize = [self.pageControl sizeForNumberOfPages:numberOfPages];
     self.pageControl.frame = CGRectIntegral(CGRectMake((CGRectGetWidth(self.bounds) - pageControlSize.width) / 2,
-                                                       CGRectGetHeight(self.bounds) - pageControlSize.height,
+                                                       CGRectGetMinY(self.segmentsBar.frame) - pageControlSize.height,
                                                        pageControlSize.width,
                                                        pageControlSize.height));
     [self.pageControl addTarget:self action:@selector(pageControlTouched:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:self.pageControl];
 
     self.scrollView = [[[UIScrollView alloc] initWithFrame:CGRectMake(0,
-                                                                      CGRectGetHeight(self.segmentsBar.bounds),
+                                                                      kScrollViewTopMargin,
                                                                       CGRectGetWidth(self.bounds),
                                                                       CGRectGetHeight(self.bounds) - CGRectGetHeight(self.segmentsBar.bounds) - pageControlSize.height)] autorelease];
     self.scrollView.pagingEnabled = YES;
@@ -147,9 +174,27 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
     self.scrollView.delegate = self;
 
     [self addSubview:self.scrollView];
+    
+    self.barDivider = [[UIView alloc] init];
+    self.barDivider.backgroundColor = [UIColor colorWithIntegerValue:0xE4E3E4 alpha:1.0];
+    self.barDivider.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    CGRect divFrame = CGRectMake(0, 0, CGRectGetWidth(self.frame), 0.5);
+    divFrame.origin.y = CGRectGetMinY(self.segmentsBar.frame) - divFrame.size.height;
+    self.barDivider.frame = divFrame;
+    [self addSubview:self.barDivider];
+    
+    self.infoImageView = [[UIImageView alloc] init];
+    self.infoImageView.backgroundColor = [UIColor clearColor];
+    self.infoImageView.contentMode = UIViewContentModeCenter;
+    self.infoImageView.image = [UIImage imageNamed:@"emoji_recent_msg.png"];
+    [self.infoImageView sizeToFit];
+    [self addSubview:self.infoImageView];
+    self.infoImageView.hidden = YES;
+    
   }
   return self;
 }
+
 
 - (void)dealloc {
   self.pageControl = nil;
@@ -162,7 +207,9 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
 }
 
 - (void)layoutSubviews {
+
   CGSize pageControlSize = [self.pageControl sizeForNumberOfPages:3];
+  
   NSUInteger numberOfPages = [self numberOfPagesForCategory:self.category
                                                 inFrameSize:CGSizeMake(CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) - CGRectGetHeight(self.segmentsBar.bounds) - pageControlSize.height)];
 
@@ -172,46 +219,87 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
   self.pageControl.numberOfPages = numberOfPages;
   pageControlSize = [self.pageControl sizeForNumberOfPages:numberOfPages];
   self.pageControl.frame = CGRectIntegral(CGRectMake((CGRectGetWidth(self.bounds) - pageControlSize.width) / 2,
-                                                     CGRectGetHeight(self.bounds) - pageControlSize.height,
+                                                     CGRectGetMinY(self.segmentsBar.frame) - pageControlSize.height,
                                                      pageControlSize.width,
                                                      pageControlSize.height));
 
   self.scrollView.frame = CGRectMake(0,
-                                     CGRectGetHeight(self.segmentsBar.bounds),
+                                     kScrollViewTopMargin,
                                      CGRectGetWidth(self.bounds),
                                      CGRectGetHeight(self.bounds) - CGRectGetHeight(self.segmentsBar.bounds) - pageControlSize.height);
   [self.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
   self.scrollView.contentOffset = CGPointMake(CGRectGetWidth(self.scrollView.bounds) * currentPage, 0);
   self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.scrollView.bounds) * numberOfPages, CGRectGetHeight(self.scrollView.bounds));
-  [self purgePageViews];
-  self.pageViews = [NSMutableArray array];
+  
+  // Do not purge pageViews because we can still reuse old pages when we switch to a new category.
+  // Since we removed the pages from the scrollView, we will know that they are available to be reused.
+  if (self.pageViews == nil) {
+    self.pageViews = [NSMutableArray array];
+  }
+
   [self setPage:currentPage];
+
+  CGRect divFrame = self.barDivider.frame;;
+  divFrame.size.width = CGRectGetWidth(self.frame);
+  divFrame.origin.y = CGRectGetMinY(self.segmentsBar.frame) - divFrame.size.height;
+  self.barDivider.frame = divFrame;
+  
+  CGPoint center = CGPointMake(floorf(CGRectGetWidth(self.bounds)/2.0),
+                               floorf(CGRectGetMinY(self.segmentsBar.frame)/2.0));
+  self.infoImageView.center = center;
+  
+  // Show message if Recent category is selected but empty.
+  if ([self.category isEqualToString:segmentRecentName]) {
+    self.infoImageView.hidden = ([[self recentEmojis] count] > 0);
+  } else {
+    self.infoImageView.hidden = YES;
+  }
 }
 
 #pragma mark event handlers
 
 - (void)setSelectedCategoryImageInSegmentControl:(UISegmentedControl *)segmentsBar AtIndex:(NSInteger)index {
-  NSArray *imagesForSelectedSegments = @[[UIImage imageNamed:@"recent_s.png"],
-                                         [UIImage imageNamed:@"face_s.png"],
-                                         [UIImage imageNamed:@"bell_s.png"],
-                                         [UIImage imageNamed:@"flower_s.png"],
-                                         [UIImage imageNamed:@"car_s.png"],
-                                         [UIImage imageNamed:@"characters_s.png"]];
-  NSArray *imagesForNonSelectedSegments = @[[UIImage imageNamed:@"recent_n.png"],
-                                            [UIImage imageNamed:@"face_n.png"],
-                                            [UIImage imageNamed:@"bell_n.png"],
-                                            [UIImage imageNamed:@"flower_n.png"],
-                                            [UIImage imageNamed:@"car_n.png"],
-                                            [UIImage imageNamed:@"characters_n.png"]];
+  
+  NSArray *imagesForSelectedSegments = @[[[UIImage imageNamed:@"emoji_tab_recent_icon-selected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal],
+                                         [[UIImage imageNamed:@"emoji_tab_face_icon-selected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal],
+                                         [[UIImage imageNamed:@"emoji_tab_bell_icon-selected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal],
+                                         [[UIImage imageNamed:@"emoji_tab_flower_icon-selected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal],
+                                         [[UIImage imageNamed:@"emoji_tab_car_icon-selected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal],
+                                         [[UIImage imageNamed:@"emoji_tab_symbols_icon-selected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal],
+                                         [[UIImage imageNamed:@"emoji_delete_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+  NSArray *imagesForNonSelectedSegments = @[[[UIImage imageNamed:@"emoji_tab_recent_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal],
+                                            [[UIImage imageNamed:@"emoji_tab_face_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal],
+                                            [[UIImage imageNamed:@"emoji_tab_bell_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal],
+                                            [[UIImage imageNamed:@"emoji_tab_flower_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal],
+                                            [[UIImage imageNamed:@"emoji_tab_car_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal],
+                                            [[UIImage imageNamed:@"emoji_tab_symbols_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal],
+                                            [[UIImage imageNamed:@"emoji_delete_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+  
   for (int i=0; i < self.segmentsBar.numberOfSegments; ++i) {
     [segmentsBar setImage:imagesForNonSelectedSegments[i] forSegmentAtIndex:i];
   }
   [segmentsBar setImage:imagesForSelectedSegments[index] forSegmentAtIndex:index];
 }
 
+- (void)segmentAction:(UISegmentedControl*)sender {
+  
+  NSUInteger idx = [sender selectedSegmentIndex];
+  NSUInteger lastSegment = [sender numberOfSegments] - 1;
+  
+  // delete button (momentary)
+  if (idx == lastSegment) {
+    sender.selectedSegmentIndex = self.selectedIndex;
+    [self.delegate emojiKeyBoardViewDidPressBackSpace:self];
+  }
+  // emoji tab (toggle)
+  else {
+    self.selectedIndex = idx;
+    [self categoryChangedViaSegmentsBar:sender];
+  }
+}
+
 - (void)categoryChangedViaSegmentsBar:(UISegmentedControl *)sender {
   // recalculate number of pages for new category and recreate emoji pages
-  NSLog(@"%d", sender.selectedSegmentIndex);
   NSArray *categoryList = @[segmentRecentName, @"People", @"Objects", @"Nature", @"Places", @"Symbols"];
 
   self.category = categoryList[sender.selectedSegmentIndex];
@@ -224,7 +312,6 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
 }
 
 - (void)pageControlTouched:(DDPageControl *)sender {
-  NSLog(@"%d", sender.currentPage);
   CGRect bounds = self.scrollView.bounds;
   bounds.origin.x = CGRectGetWidth(bounds) * sender.currentPage;
   bounds.origin.y = 0;
@@ -252,8 +339,11 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
     return NO;
   }
   for (EmojiPageView *page in self.pageViews) {
-    if ((page.frame.origin.x / CGRectGetWidth(self.scrollView.bounds)) == index) {
-      return NO;
+    // Ignore pageView if it's not a subView of the scrollView (i.e. a pageView needs to be set for this index).
+    if ([page isDescendantOfView:self.scrollView]) {
+      if ((page.frame.origin.x / CGRectGetWidth(self.scrollView.bounds)) == index) {
+        return NO;
+      }
     }
   }
   return YES;
@@ -281,8 +371,16 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
 - (EmojiPageView *)usableEmojiPageView {
   EmojiPageView *pageView = nil;
   for (EmojiPageView *page in self.pageViews) {
-    NSUInteger pageNumber = page.frame.origin.x / CGRectGetWidth(self.scrollView.bounds);
-    if (abs(pageNumber - self.pageControl.currentPage) > 1) {
+    
+    // If the page is in the scrollView and it's not a neighbor of the current page, then use it.
+    // If it's not in the scrollView, then use it.
+    if ([page isDescendantOfView:self.scrollView]) {
+      NSUInteger pageNumber = page.frame.origin.x / CGRectGetWidth(self.scrollView.bounds);
+      if (abs(pageNumber - self.pageControl.currentPage) > 1) {
+        pageView = page;
+        break;
+      }
+    } else {
       pageView = page;
       break;
     }
@@ -295,21 +393,27 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
 
 // Set emoji page view for given index.
 - (void)setEmojiPageViewInScrollView:(UIScrollView *)scrollView atIndex:(NSUInteger)index {
-
+  
   if (![self requireToSetPageViewForIndex:index]) {
     return;
   }
 
   EmojiPageView *pageView = [self usableEmojiPageView];
+  
+  // Make sure pageView has been added to the scrollView (in case it's being reused in a new category).
+  if (![pageView isDescendantOfView:self.scrollView]) {
+    [self.scrollView addSubview:pageView];
+  }
 
   NSUInteger rows = [self numberOfRowsForFrameSize:scrollView.bounds.size];
   NSUInteger columns = [self numberOfColumnsForFrameSize:scrollView.bounds.size];
-  NSUInteger startingIndex = index * (rows * columns - 1);
-  NSUInteger endingIndex = (index + 1) * (rows * columns - 1);
+  NSUInteger startingIndex = index * (rows * columns);
+  NSUInteger endingIndex = (index + 1) * (rows * columns);
+  
   NSMutableArray *buttonTexts = [self emojiTextsForCategory:self.category
                                                   fromIndex:startingIndex
                                                     toIndex:endingIndex];
-  NSLog(@"Setting page at index %d", index);
+  
   [pageView setButtonTexts:buttonTexts];
   pageView.frame = CGRectMake(index * CGRectGetWidth(scrollView.bounds), 0, CGRectGetWidth(scrollView.bounds), CGRectGetHeight(scrollView.bounds));
 }
@@ -357,10 +461,9 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
   NSUInteger emojiCount = [[self emojiListForCategory:category] count];
   NSUInteger numberOfRows = [self numberOfRowsForFrameSize:frameSize];
   NSUInteger numberOfColumns = [self numberOfColumnsForFrameSize:frameSize];
-  NSUInteger numberOfEmojisOnAPage = (numberOfRows * numberOfColumns) - 1;
+  NSUInteger numberOfEmojisOnAPage = numberOfRows * numberOfColumns;
 
   NSUInteger numberOfPages = (NSUInteger)ceil((float)emojiCount / numberOfEmojisOnAPage);
-  NSLog(@"%d %d %d :: %d", numberOfRows, numberOfColumns, emojiCount, numberOfPages);
   return numberOfPages;
 }
 
@@ -393,9 +496,5 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
   [self.delegate emojiKeyBoardView:self didUseEmoji:emoji];
 }
 
-- (void)emojiPageViewDidPressBackSpace:(EmojiPageView *)emojiPageView {
-  NSLog(@"Back button pressed");
-  [self.delegate emojiKeyBoardViewDidPressBackSpace:self];
-}
 
 @end

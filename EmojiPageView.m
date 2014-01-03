@@ -8,7 +8,6 @@
 
 #import "EmojiPageView.h"
 
-#define BACKSPACE_BUTTON_TAG 10
 #define BUTTON_FONT_SIZE 32
 
 @interface EmojiPageView ()
@@ -30,13 +29,26 @@
 - (void)setButtonTexts:(NSMutableArray *)buttonTexts {
 
   NSAssert(buttonTexts != nil, @"Array containing texts to be set on buttons is nil");
-
-  if (([self.buttons count] - 1) == [buttonTexts count]) {
+  
+  // If page has enough buttons to accomodate number of emojis for the page, then just reassign
+  // new emojis to the buttons. Otherwise create new buttons for page.
+  if ([self.buttons count] >= [buttonTexts count]) {
+    
     // just reset text on each button
-    for (NSUInteger i = 0; i < [buttonTexts count]; ++i) {
-      [self.buttons[i] setTitle:buttonTexts[i] forState:UIControlStateNormal];
+    for (NSUInteger i = 0; i < [self.buttons count]; ++i) {
+      
+      // If we have text for button, then set it and enable button. Otherwise clear button title and disable.
+      if (i < [buttonTexts count]) {
+        [self.buttons[i] setTitle:buttonTexts[i] forState:UIControlStateNormal];
+        [self.buttons[i] setEnabled:YES];
+      } else {
+        [self.buttons[i] setTitle:nil forState:UIControlStateNormal];
+        [self.buttons[i] setEnabled:NO];
+      }
     }
+    
   } else {
+    
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     self.buttons = nil;
     self.buttons = [NSMutableArray arrayWithCapacity:self.rows * self.columns];
@@ -45,10 +57,6 @@
       [button setTitle:buttonTexts[i] forState:UIControlStateNormal];
       [self addToViewButton:button];
     }
-    UIButton *button = [self createButtonAtIndex:self.rows * self.columns - 1];
-    [button setImage:[UIImage imageNamed:@"backspace_n.png"] forState:UIControlStateNormal];
-    button.tag = BACKSPACE_BUTTON_TAG;
-    [self addToViewButton:button];
   }
 }
 
@@ -103,12 +111,6 @@
 }
 
 - (void)emojiButtonPressed:(UIButton *)button {
-  if (button.tag == BACKSPACE_BUTTON_TAG) {
-    NSLog(@"Back space pressed");
-    [self.delegate emojiPageViewDidPressBackSpace:self];
-    return;
-  }
-  NSLog(@"%@", button.titleLabel.text);
   [self.delegate emojiPageView:self didUseEmoji:button.titleLabel.text];
 }
 

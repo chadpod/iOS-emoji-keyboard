@@ -43,10 +43,5 @@
  */
 - (void)emojiPageView:(EmojiPageView *)emojiPageView didUseEmoji:(NSString *)emoji;
 
-/**
- Delegate method called when user taps on the backspace button
- @param emojiPageView EmojiPageView object on which user has tapped.
- */
-- (void)emojiPageViewDidPressBackSpace:(EmojiPageView *)emojiPageView;
 
 @end
