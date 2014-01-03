@@ -50,6 +50,7 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
 @property (nonatomic, assign) NSUInteger selectedIndex;
 @property (nonatomic, retain) UIView* barDivider;
 @property (nonatomic, retain) UIImageView* infoImageView;
+@property (nonatomic, retain) UILabel* infoLabel;
 
 @end
 
@@ -61,6 +62,11 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
 @synthesize emojis = emojis_;
 @synthesize pageViews = pageViews_;
 @synthesize category = category_;
+@synthesize selectedIndex = selectedIndex_;
+@synthesize barDivider = barDivider_;
+@synthesize infoImageView = infoImageView_;
+@synthesize infoLabel = infoLabel_;
+
 
 - (NSDictionary *)emojis {
   if (!emojis_) {
@@ -191,6 +197,17 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
     [self addSubview:self.infoImageView];
     self.infoImageView.hidden = YES;
     
+    self.infoLabel = [[UILabel alloc] init];
+    self.infoLabel.backgroundColor = [UIColor clearColor];
+    self.infoLabel.numberOfLines = 1;
+    self.infoLabel.textAlignment = NSTextAlignmentCenter;
+    self.infoLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    self.infoLabel.text = @"Recently Used";
+    self.infoLabel.font = [UIFont systemFontOfSize:11];
+    self.infoLabel.textColor = [UIColor grayColor];
+    [self addSubview:self.infoLabel];
+    self.infoLabel.hidden = YES;
+    [self.infoLabel sizeToFit];
   }
   return self;
 }
@@ -202,6 +219,9 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
   self.segmentsBar = nil;
   self.category = nil;
   self.emojis = nil;
+  self.barDivider = nil;
+  self.infoImageView = nil;
+  self.infoLabel = nil;
   [self purgePageViews];
   [super dealloc];
 }
@@ -250,9 +270,21 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
   
   // Show message if Recent category is selected but empty.
   if ([self.category isEqualToString:segmentRecentName]) {
-    self.infoImageView.hidden = ([[self recentEmojis] count] > 0);
+    
+    if ([[self recentEmojis] count] > 0) {
+      self.infoImageView.hidden = YES;
+      self.infoLabel.hidden = NO;
+      self.infoLabel.center = self.pageControl.center;
+      
+    } else {
+      self.infoImageView.hidden = NO;
+      self.infoLabel.hidden = YES;
+    }
+    
+    
   } else {
     self.infoImageView.hidden = YES;
+    self.infoLabel.hidden = YES;
   }
 }
 
