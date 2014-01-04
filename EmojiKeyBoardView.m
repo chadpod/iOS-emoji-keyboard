@@ -203,8 +203,14 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
     self.infoLabel.textAlignment = NSTextAlignmentCenter;
     self.infoLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     self.infoLabel.text = @"Recently Used";
-    self.infoLabel.font = [UIFont systemFontOfSize:11];
-    self.infoLabel.textColor = [UIColor grayColor];
+    
+    // Try to use proxima if available, otherwise fall back to system.
+    UIFont* font = [UIFont fontWithName:@"ProximaNova-Regular" size:12];
+    if (font == nil) {
+      font = [UIFont systemFontOfSize:11];
+    }
+    self.infoLabel.font = font;
+    self.infoLabel.textColor = [UIColor colorWithIntegerValue:0xADA5A5 alpha:1.0];
     [self addSubview:self.infoLabel];
     self.infoLabel.hidden = YES;
     [self.infoLabel sizeToFit];
