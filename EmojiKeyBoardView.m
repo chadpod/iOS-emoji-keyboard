@@ -105,8 +105,6 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
 {
   self = [super initWithFrame:frame];
   if (self) {
-    // initialize category
-    self.category = segmentRecentName;
 
     self.backgroundColor = [UIColor colorWithIntegerValue:BACKGROUND_COLOR alpha:1.0];
 
@@ -145,12 +143,24 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
       remainingWidth -= tabWidth;
     }
     
+    // Initialize category to RECENT (index 0).
+    self.category = segmentRecentName;
+    NSInteger initialIndex = DEFAULT_SELECTED_SEGMENT;
+    
+    // If there are no recent emoji yet, then default to FACES category (index 1).
+    if ([[self recentEmojis] count] == 0) {
+      initialIndex = 1;
+    }
+    
     [self.segmentsBar addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
-    [self setSelectedCategoryImageInSegmentControl:self.segmentsBar AtIndex:DEFAULT_SELECTED_SEGMENT];
-    self.segmentsBar.selectedSegmentIndex = DEFAULT_SELECTED_SEGMENT;
+    self.segmentsBar.selectedSegmentIndex = initialIndex;
     self.selectedIndex = self.segmentsBar.selectedSegmentIndex; // initialize property
     [self addSubview:self.segmentsBar];
-
+    
+    // After the segmentsBar has been initialized force the category to update to match the initially selected index.
+    // This will also update the tab images for the selected tab (calls setSelectedCategoryImageInSegmentControl).
+    [self categoryChangedViaSegmentsBar:self.segmentsBar];
+    
     self.pageControl = [[DDPageControl alloc] initWithType:DDPageControlTypeOnFullOffFull];
     self.pageControl.onColor = [UIColor darkGrayColor];
     self.pageControl.offColor = [UIColor lightGrayColor];
@@ -178,7 +188,6 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.delegate = self;
-
     [self addSubview:self.scrollView];
     
     self.barDivider = [[UIView alloc] init];
@@ -342,11 +351,15 @@ NSString *const RecentUsedEmojiCharactersKey = @"RecentUsedEmojiCharactersKey";
 
   self.category = categoryList[sender.selectedSegmentIndex];
   [self setSelectedCategoryImageInSegmentControl:sender AtIndex:sender.selectedSegmentIndex];
-  self.pageControl.currentPage = 0;
-  // This triggers layoutSubviews
-  // Choose a number that can never be equal to numberOfPages of pagecontrol else
-  // layoutSubviews would not be called
-  self.pageControl.numberOfPages = 100;
+
+  // If the pageControl has been allocated...
+  if (pageControl_ != nil) {
+    self.pageControl.currentPage = 0;
+    // This triggers layoutSubviews
+    // Choose a number that can never be equal to numberOfPages of pagecontrol else
+    // layoutSubviews would not be called
+    self.pageControl.numberOfPages = 100;
+  }
 }
 
 - (void)pageControlTouched:(DDPageControl *)sender {
