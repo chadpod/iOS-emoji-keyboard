@@ -57,6 +57,40 @@
 		2A6EABAF173CDDA6000BCD9B /* EmojisList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A6EABAE173CDDA6000BCD9B /* EmojisList.plist */; };
 		2AA48D1217882C5E00B7F11B /* EmojiKeyBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA48D1017882C5E00B7F11B /* EmojiKeyBoardView.m */; };
 		2AA48D1317882C5E00B7F11B /* EmojiPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA48D1117882C5E00B7F11B /* EmojiPageView.m */; };
+		6334703618A047C9006F498C /* emoji_delete_icon-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334701418A047C9006F498C /* emoji_delete_icon-selected.png */; };
+		6334703718A047C9006F498C /* emoji_delete_icon-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334701518A047C9006F498C /* emoji_delete_icon-selected@2x.png */; };
+		6334703818A047C9006F498C /* emoji_delete_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334701618A047C9006F498C /* emoji_delete_icon.png */; };
+		6334703918A047C9006F498C /* emoji_delete_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334701718A047C9006F498C /* emoji_delete_icon@2x.png */; };
+		6334703A18A047C9006F498C /* emoji_divider.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334701818A047C9006F498C /* emoji_divider.png */; };
+		6334703B18A047C9006F498C /* emoji_divider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334701918A047C9006F498C /* emoji_divider@2x.png */; };
+		6334703C18A047C9006F498C /* emoji_recent_msg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334701A18A047C9006F498C /* emoji_recent_msg.png */; };
+		6334703D18A047C9006F498C /* emoji_recent_msg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334701B18A047C9006F498C /* emoji_recent_msg@2x.png */; };
+		6334703E18A047C9006F498C /* emoji_tab_bell_icon-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334701C18A047C9006F498C /* emoji_tab_bell_icon-selected.png */; };
+		6334703F18A047C9006F498C /* emoji_tab_bell_icon-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334701D18A047C9006F498C /* emoji_tab_bell_icon-selected@2x.png */; };
+		6334704018A047C9006F498C /* emoji_tab_bell_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334701E18A047C9006F498C /* emoji_tab_bell_icon.png */; };
+		6334704118A047C9006F498C /* emoji_tab_bell_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334701F18A047C9006F498C /* emoji_tab_bell_icon@2x.png */; };
+		6334704218A047C9006F498C /* emoji_tab_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334702018A047C9006F498C /* emoji_tab_bg.png */; };
+		6334704318A047C9006F498C /* emoji_tab_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334702118A047C9006F498C /* emoji_tab_bg@2x.png */; };
+		6334704418A047C9006F498C /* emoji_tab_car_icon-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334702218A047C9006F498C /* emoji_tab_car_icon-selected.png */; };
+		6334704518A047C9006F498C /* emoji_tab_car_icon-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334702318A047C9006F498C /* emoji_tab_car_icon-selected@2x.png */; };
+		6334704618A047C9006F498C /* emoji_tab_car_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334702418A047C9006F498C /* emoji_tab_car_icon.png */; };
+		6334704718A047C9006F498C /* emoji_tab_car_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334702518A047C9006F498C /* emoji_tab_car_icon@2x.png */; };
+		6334704818A047C9006F498C /* emoji_tab_face_icon-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334702618A047C9006F498C /* emoji_tab_face_icon-selected.png */; };
+		6334704918A047C9006F498C /* emoji_tab_face_icon-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334702718A047C9006F498C /* emoji_tab_face_icon-selected@2x.png */; };
+		6334704A18A047C9006F498C /* emoji_tab_face_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334702818A047C9006F498C /* emoji_tab_face_icon.png */; };
+		6334704B18A047C9006F498C /* emoji_tab_face_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334702918A047C9006F498C /* emoji_tab_face_icon@2x.png */; };
+		6334704C18A047C9006F498C /* emoji_tab_flower_icon-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334702A18A047C9006F498C /* emoji_tab_flower_icon-selected.png */; };
+		6334704D18A047C9006F498C /* emoji_tab_flower_icon-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334702B18A047C9006F498C /* emoji_tab_flower_icon-selected@2x.png */; };
+		6334704E18A047C9006F498C /* emoji_tab_flower_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334702C18A047C9006F498C /* emoji_tab_flower_icon.png */; };
+		6334704F18A047C9006F498C /* emoji_tab_flower_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334702D18A047C9006F498C /* emoji_tab_flower_icon@2x.png */; };
+		6334705018A047C9006F498C /* emoji_tab_recent_icon-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334702E18A047C9006F498C /* emoji_tab_recent_icon-selected.png */; };
+		6334705118A047C9006F498C /* emoji_tab_recent_icon-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334702F18A047C9006F498C /* emoji_tab_recent_icon-selected@2x.png */; };
+		6334705218A047C9006F498C /* emoji_tab_recent_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334703018A047C9006F498C /* emoji_tab_recent_icon.png */; };
+		6334705318A047C9006F498C /* emoji_tab_recent_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334703118A047C9006F498C /* emoji_tab_recent_icon@2x.png */; };
+		6334705418A047C9006F498C /* emoji_tab_symbols_icon-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334703218A047C9006F498C /* emoji_tab_symbols_icon-selected.png */; };
+		6334705518A047C9006F498C /* emoji_tab_symbols_icon-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334703318A047C9006F498C /* emoji_tab_symbols_icon-selected@2x.png */; };
+		6334705618A047C9006F498C /* emoji_tab_symbols_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334703418A047C9006F498C /* emoji_tab_symbols_icon.png */; };
+		6334705718A047C9006F498C /* emoji_tab_symbols_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6334703518A047C9006F498C /* emoji_tab_symbols_icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,6 +152,40 @@
 		2AA48D0F17882C5E00B7F11B /* EmojiPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmojiPageView.h; path = ../../EmojiPageView.h; sourceTree = "<group>"; };
 		2AA48D1017882C5E00B7F11B /* EmojiKeyBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmojiKeyBoardView.m; path = ../../EmojiKeyBoardView.m; sourceTree = "<group>"; };
 		2AA48D1117882C5E00B7F11B /* EmojiPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmojiPageView.m; path = ../../EmojiPageView.m; sourceTree = "<group>"; };
+		6334701418A047C9006F498C /* emoji_delete_icon-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_delete_icon-selected.png"; path = "Resources/Images/emoji_delete_icon-selected.png"; sourceTree = "<group>"; };
+		6334701518A047C9006F498C /* emoji_delete_icon-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_delete_icon-selected@2x.png"; path = "Resources/Images/emoji_delete_icon-selected@2x.png"; sourceTree = "<group>"; };
+		6334701618A047C9006F498C /* emoji_delete_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emoji_delete_icon.png; path = Resources/Images/emoji_delete_icon.png; sourceTree = "<group>"; };
+		6334701718A047C9006F498C /* emoji_delete_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_delete_icon@2x.png"; path = "Resources/Images/emoji_delete_icon@2x.png"; sourceTree = "<group>"; };
+		6334701818A047C9006F498C /* emoji_divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emoji_divider.png; path = Resources/Images/emoji_divider.png; sourceTree = "<group>"; };
+		6334701918A047C9006F498C /* emoji_divider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_divider@2x.png"; path = "Resources/Images/emoji_divider@2x.png"; sourceTree = "<group>"; };
+		6334701A18A047C9006F498C /* emoji_recent_msg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emoji_recent_msg.png; path = Resources/Images/emoji_recent_msg.png; sourceTree = "<group>"; };
+		6334701B18A047C9006F498C /* emoji_recent_msg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_recent_msg@2x.png"; path = "Resources/Images/emoji_recent_msg@2x.png"; sourceTree = "<group>"; };
+		6334701C18A047C9006F498C /* emoji_tab_bell_icon-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_bell_icon-selected.png"; path = "Resources/Images/emoji_tab_bell_icon-selected.png"; sourceTree = "<group>"; };
+		6334701D18A047C9006F498C /* emoji_tab_bell_icon-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_bell_icon-selected@2x.png"; path = "Resources/Images/emoji_tab_bell_icon-selected@2x.png"; sourceTree = "<group>"; };
+		6334701E18A047C9006F498C /* emoji_tab_bell_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emoji_tab_bell_icon.png; path = Resources/Images/emoji_tab_bell_icon.png; sourceTree = "<group>"; };
+		6334701F18A047C9006F498C /* emoji_tab_bell_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_bell_icon@2x.png"; path = "Resources/Images/emoji_tab_bell_icon@2x.png"; sourceTree = "<group>"; };
+		6334702018A047C9006F498C /* emoji_tab_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emoji_tab_bg.png; path = Resources/Images/emoji_tab_bg.png; sourceTree = "<group>"; };
+		6334702118A047C9006F498C /* emoji_tab_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_bg@2x.png"; path = "Resources/Images/emoji_tab_bg@2x.png"; sourceTree = "<group>"; };
+		6334702218A047C9006F498C /* emoji_tab_car_icon-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_car_icon-selected.png"; path = "Resources/Images/emoji_tab_car_icon-selected.png"; sourceTree = "<group>"; };
+		6334702318A047C9006F498C /* emoji_tab_car_icon-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_car_icon-selected@2x.png"; path = "Resources/Images/emoji_tab_car_icon-selected@2x.png"; sourceTree = "<group>"; };
+		6334702418A047C9006F498C /* emoji_tab_car_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emoji_tab_car_icon.png; path = Resources/Images/emoji_tab_car_icon.png; sourceTree = "<group>"; };
+		6334702518A047C9006F498C /* emoji_tab_car_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_car_icon@2x.png"; path = "Resources/Images/emoji_tab_car_icon@2x.png"; sourceTree = "<group>"; };
+		6334702618A047C9006F498C /* emoji_tab_face_icon-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_face_icon-selected.png"; path = "Resources/Images/emoji_tab_face_icon-selected.png"; sourceTree = "<group>"; };
+		6334702718A047C9006F498C /* emoji_tab_face_icon-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_face_icon-selected@2x.png"; path = "Resources/Images/emoji_tab_face_icon-selected@2x.png"; sourceTree = "<group>"; };
+		6334702818A047C9006F498C /* emoji_tab_face_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emoji_tab_face_icon.png; path = Resources/Images/emoji_tab_face_icon.png; sourceTree = "<group>"; };
+		6334702918A047C9006F498C /* emoji_tab_face_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_face_icon@2x.png"; path = "Resources/Images/emoji_tab_face_icon@2x.png"; sourceTree = "<group>"; };
+		6334702A18A047C9006F498C /* emoji_tab_flower_icon-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_flower_icon-selected.png"; path = "Resources/Images/emoji_tab_flower_icon-selected.png"; sourceTree = "<group>"; };
+		6334702B18A047C9006F498C /* emoji_tab_flower_icon-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_flower_icon-selected@2x.png"; path = "Resources/Images/emoji_tab_flower_icon-selected@2x.png"; sourceTree = "<group>"; };
+		6334702C18A047C9006F498C /* emoji_tab_flower_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emoji_tab_flower_icon.png; path = Resources/Images/emoji_tab_flower_icon.png; sourceTree = "<group>"; };
+		6334702D18A047C9006F498C /* emoji_tab_flower_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_flower_icon@2x.png"; path = "Resources/Images/emoji_tab_flower_icon@2x.png"; sourceTree = "<group>"; };
+		6334702E18A047C9006F498C /* emoji_tab_recent_icon-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_recent_icon-selected.png"; path = "Resources/Images/emoji_tab_recent_icon-selected.png"; sourceTree = "<group>"; };
+		6334702F18A047C9006F498C /* emoji_tab_recent_icon-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_recent_icon-selected@2x.png"; path = "Resources/Images/emoji_tab_recent_icon-selected@2x.png"; sourceTree = "<group>"; };
+		6334703018A047C9006F498C /* emoji_tab_recent_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emoji_tab_recent_icon.png; path = Resources/Images/emoji_tab_recent_icon.png; sourceTree = "<group>"; };
+		6334703118A047C9006F498C /* emoji_tab_recent_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_recent_icon@2x.png"; path = "Resources/Images/emoji_tab_recent_icon@2x.png"; sourceTree = "<group>"; };
+		6334703218A047C9006F498C /* emoji_tab_symbols_icon-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_symbols_icon-selected.png"; path = "Resources/Images/emoji_tab_symbols_icon-selected.png"; sourceTree = "<group>"; };
+		6334703318A047C9006F498C /* emoji_tab_symbols_icon-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_symbols_icon-selected@2x.png"; path = "Resources/Images/emoji_tab_symbols_icon-selected@2x.png"; sourceTree = "<group>"; };
+		6334703418A047C9006F498C /* emoji_tab_symbols_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emoji_tab_symbols_icon.png; path = Resources/Images/emoji_tab_symbols_icon.png; sourceTree = "<group>"; };
+		6334703518A047C9006F498C /* emoji_tab_symbols_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emoji_tab_symbols_icon@2x.png"; path = "Resources/Images/emoji_tab_symbols_icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +273,40 @@
 		2A515AEC177F17E9009C90AC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6334701418A047C9006F498C /* emoji_delete_icon-selected.png */,
+				6334701518A047C9006F498C /* emoji_delete_icon-selected@2x.png */,
+				6334701618A047C9006F498C /* emoji_delete_icon.png */,
+				6334701718A047C9006F498C /* emoji_delete_icon@2x.png */,
+				6334701818A047C9006F498C /* emoji_divider.png */,
+				6334701918A047C9006F498C /* emoji_divider@2x.png */,
+				6334701A18A047C9006F498C /* emoji_recent_msg.png */,
+				6334701B18A047C9006F498C /* emoji_recent_msg@2x.png */,
+				6334701C18A047C9006F498C /* emoji_tab_bell_icon-selected.png */,
+				6334701D18A047C9006F498C /* emoji_tab_bell_icon-selected@2x.png */,
+				6334701E18A047C9006F498C /* emoji_tab_bell_icon.png */,
+				6334701F18A047C9006F498C /* emoji_tab_bell_icon@2x.png */,
+				6334702018A047C9006F498C /* emoji_tab_bg.png */,
+				6334702118A047C9006F498C /* emoji_tab_bg@2x.png */,
+				6334702218A047C9006F498C /* emoji_tab_car_icon-selected.png */,
+				6334702318A047C9006F498C /* emoji_tab_car_icon-selected@2x.png */,
+				6334702418A047C9006F498C /* emoji_tab_car_icon.png */,
+				6334702518A047C9006F498C /* emoji_tab_car_icon@2x.png */,
+				6334702618A047C9006F498C /* emoji_tab_face_icon-selected.png */,
+				6334702718A047C9006F498C /* emoji_tab_face_icon-selected@2x.png */,
+				6334702818A047C9006F498C /* emoji_tab_face_icon.png */,
+				6334702918A047C9006F498C /* emoji_tab_face_icon@2x.png */,
+				6334702A18A047C9006F498C /* emoji_tab_flower_icon-selected.png */,
+				6334702B18A047C9006F498C /* emoji_tab_flower_icon-selected@2x.png */,
+				6334702C18A047C9006F498C /* emoji_tab_flower_icon.png */,
+				6334702D18A047C9006F498C /* emoji_tab_flower_icon@2x.png */,
+				6334702E18A047C9006F498C /* emoji_tab_recent_icon-selected.png */,
+				6334702F18A047C9006F498C /* emoji_tab_recent_icon-selected@2x.png */,
+				6334703018A047C9006F498C /* emoji_tab_recent_icon.png */,
+				6334703118A047C9006F498C /* emoji_tab_recent_icon@2x.png */,
+				6334703218A047C9006F498C /* emoji_tab_symbols_icon-selected.png */,
+				6334703318A047C9006F498C /* emoji_tab_symbols_icon-selected@2x.png */,
+				6334703418A047C9006F498C /* emoji_tab_symbols_icon.png */,
+				6334703518A047C9006F498C /* emoji_tab_symbols_icon@2x.png */,
 				2A515AEF177F18B9009C90AC /* backspace_n.png */,
 				2A515AF0177F18B9009C90AC /* backspace_n@2x.png */,
 				2A515AF1177F18B9009C90AC /* bell_n.png */,
@@ -307,32 +409,57 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A3D5E9E171EBE42005DC720 /* InfoPlist.strings in Resources */,
+				6334703C18A047C9006F498C /* emoji_recent_msg.png in Resources */,
 				2A3D5EA6171EBE42005DC720 /* Default.png in Resources */,
+				6334703D18A047C9006F498C /* emoji_recent_msg@2x.png in Resources */,
+				6334704B18A047C9006F498C /* emoji_tab_face_icon@2x.png in Resources */,
+				6334704318A047C9006F498C /* emoji_tab_bg@2x.png in Resources */,
 				2A3D5EA8171EBE42005DC720 /* Default@2x.png in Resources */,
+				6334704118A047C9006F498C /* emoji_tab_bell_icon@2x.png in Resources */,
 				2A3D5EAA171EBE42005DC720 /* Default-568h@2x.png in Resources */,
 				2A6EABAF173CDDA6000BCD9B /* EmojisList.plist in Resources */,
 				2A515B13177F18B9009C90AC /* backspace_n.png in Resources */,
 				2A515B14177F18B9009C90AC /* backspace_n@2x.png in Resources */,
 				2A515B15177F18B9009C90AC /* bell_n.png in Resources */,
 				2A515B16177F18B9009C90AC /* bell_n@2x.png in Resources */,
+				6334703618A047C9006F498C /* emoji_delete_icon-selected.png in Resources */,
 				2A515B17177F18B9009C90AC /* bell_s.png in Resources */,
+				6334703B18A047C9006F498C /* emoji_divider@2x.png in Resources */,
 				2A515B18177F18B9009C90AC /* bell_s@2x.png in Resources */,
 				2A515B19177F18B9009C90AC /* car_n.png in Resources */,
+				6334704818A047C9006F498C /* emoji_tab_face_icon-selected.png in Resources */,
 				2A515B1A177F18B9009C90AC /* car_n@2x.png in Resources */,
+				6334705518A047C9006F498C /* emoji_tab_symbols_icon-selected@2x.png in Resources */,
 				2A515B1B177F18B9009C90AC /* car_s.png in Resources */,
+				6334705418A047C9006F498C /* emoji_tab_symbols_icon-selected.png in Resources */,
+				6334704018A047C9006F498C /* emoji_tab_bell_icon.png in Resources */,
+				6334704C18A047C9006F498C /* emoji_tab_flower_icon-selected.png in Resources */,
 				2A515B1C177F18B9009C90AC /* car_s@2x.png in Resources */,
+				6334704618A047C9006F498C /* emoji_tab_car_icon.png in Resources */,
 				2A515B1D177F18B9009C90AC /* characters_n.png in Resources */,
 				2A515B1E177F18B9009C90AC /* characters_n@2x.png in Resources */,
+				6334704D18A047C9006F498C /* emoji_tab_flower_icon-selected@2x.png in Resources */,
 				2A515B1F177F18B9009C90AC /* characters_s.png in Resources */,
+				6334703E18A047C9006F498C /* emoji_tab_bell_icon-selected.png in Resources */,
+				6334703918A047C9006F498C /* emoji_delete_icon@2x.png in Resources */,
+				6334704718A047C9006F498C /* emoji_tab_car_icon@2x.png in Resources */,
+				6334705618A047C9006F498C /* emoji_tab_symbols_icon.png in Resources */,
+				6334703A18A047C9006F498C /* emoji_divider.png in Resources */,
+				6334703F18A047C9006F498C /* emoji_tab_bell_icon-selected@2x.png in Resources */,
 				2A515B20177F18B9009C90AC /* characters_s@2x.png in Resources */,
 				2A515B21177F18B9009C90AC /* corner_left.png in Resources */,
 				2A515B22177F18B9009C90AC /* corner_left@2x.png in Resources */,
 				2A515B23177F18B9009C90AC /* corner_right.png in Resources */,
 				2A515B24177F18B9009C90AC /* corner_right@2x.png in Resources */,
+				6334704218A047C9006F498C /* emoji_tab_bg.png in Resources */,
+				6334704918A047C9006F498C /* emoji_tab_face_icon-selected@2x.png in Resources */,
 				2A515B25177F18B9009C90AC /* face_n.png in Resources */,
 				2A515B26177F18B9009C90AC /* face_n@2x.png in Resources */,
 				2A515B27177F18B9009C90AC /* face_s.png in Resources */,
+				6334704A18A047C9006F498C /* emoji_tab_face_icon.png in Resources */,
 				2A515B28177F18B9009C90AC /* face_s@2x.png in Resources */,
+				6334704518A047C9006F498C /* emoji_tab_car_icon-selected@2x.png in Resources */,
+				6334705118A047C9006F498C /* emoji_tab_recent_icon-selected@2x.png in Resources */,
 				2A515B29177F18B9009C90AC /* flower_n.png in Resources */,
 				2A515B2A177F18B9009C90AC /* flower_n@2x.png in Resources */,
 				2A515B2B177F18B9009C90AC /* flower_s.png in Resources */,
@@ -341,12 +468,21 @@
 				2A515B2E177F18B9009C90AC /* icons_bg_separator@2x.png in Resources */,
 				2A515B2F177F18B9009C90AC /* recent_n.png in Resources */,
 				2A515B30177F18B9009C90AC /* recent_n@2x.png in Resources */,
+				6334704F18A047C9006F498C /* emoji_tab_flower_icon@2x.png in Resources */,
+				6334705018A047C9006F498C /* emoji_tab_recent_icon-selected.png in Resources */,
+				6334704418A047C9006F498C /* emoji_tab_car_icon-selected.png in Resources */,
+				6334705218A047C9006F498C /* emoji_tab_recent_icon.png in Resources */,
 				2A515B31177F18B9009C90AC /* recent_s.png in Resources */,
+				6334705318A047C9006F498C /* emoji_tab_recent_icon@2x.png in Resources */,
 				2A515B32177F18B9009C90AC /* recent_s@2x.png in Resources */,
 				2A515B33177F18B9009C90AC /* tab_bg.png in Resources */,
+				6334704E18A047C9006F498C /* emoji_tab_flower_icon.png in Resources */,
 				2A515B34177F18B9009C90AC /* tab_bg@2x.png in Resources */,
+				6334703718A047C9006F498C /* emoji_delete_icon-selected@2x.png in Resources */,
 				2A515B35177F18B9009C90AC /* unselected_center_bg.png in Resources */,
+				6334703818A047C9006F498C /* emoji_delete_icon.png in Resources */,
 				2A515B36177F18B9009C90AC /* unselected_center_bg@2x.png in Resources */,
+				6334705718A047C9006F498C /* emoji_tab_symbols_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +573,7 @@
 		2A3D5EB4171EBE42005DC720 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EmojiKeyBoard/EmojiKeyBoard-Prefix.pch";
 				INFOPLIST_FILE = "EmojiKeyBoard/EmojiKeyBoard-Info.plist";
@@ -449,6 +586,7 @@
 		2A3D5EB5171EBE42005DC720 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EmojiKeyBoard/EmojiKeyBoard-Prefix.pch";
 				INFOPLIST_FILE = "EmojiKeyBoard/EmojiKeyBoard-Info.plist";

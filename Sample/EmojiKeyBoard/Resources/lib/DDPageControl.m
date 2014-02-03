@@ -51,18 +51,17 @@
 	return self ;
 }
 
-- (void)dealloc 
+- (void)dealloc
 {
 	onColor = nil ;
 	offColor = nil ;
-  [super dealloc];
 }
 
 
 #pragma mark -
 #pragma mark drawRect
 
-- (void)drawRect:(CGRect)rect 
+- (void)drawRect:(CGRect)rect
 {
 	// get the current context
 	CGContextRef context = UIGraphicsGetCurrentContext() ;
@@ -73,7 +72,7 @@
 	// allow antialiasing
 	CGContextSetAllowsAntialiasing(context, TRUE) ;
 	
-	// get the caller's diameter if it has been set or use the default one 
+	// get the caller's diameter if it has been set or use the default one
 	CGFloat diameter = (indicatorDiameter > 0) ? indicatorDiameter : kDotDiameter ;
 	CGFloat space = (indicatorSpace > 0) ? indicatorSpace : kDotSpace ;
 	

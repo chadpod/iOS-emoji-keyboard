@@ -22,9 +22,9 @@
 
 - (void)loadView {
   [super loadView];
-  self.textView = [[[UITextView alloc] initWithFrame:self.view.frame] autorelease];
+  self.textView = [[UITextView alloc] initWithFrame:self.view.frame];
   self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-  self.emojiKeyboardView = [[[EmojiKeyBoardView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 216)] autorelease];
+  self.emojiKeyboardView = [[EmojiKeyBoardView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 216)];
   self.emojiKeyboardView.delegate = self;
   [self.view addSubview:self.textView];
 }

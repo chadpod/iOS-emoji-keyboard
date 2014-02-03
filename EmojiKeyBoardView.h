@@ -16,6 +16,8 @@
 
 @property (nonatomic, assign) id<EmojiKeyboardViewDelegate> delegate;
 
++ (void)clearRecentEmojis;
+
 @end
 
 @protocol EmojiKeyboardViewDelegate <NSObject>
